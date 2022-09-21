@@ -1,0 +1,27 @@
+วิธีติดตั้ง support php5.6 - 7.4 (php8 ใช้ไม่ได้นะจ้ะ)
+
+0. แตกไฟล์เป็นโฟลเดอร์ปกติ (Extract file from .zip)
+
+1. นำโฟลเดอร์ระบบไปไว้ใน xampp/htdocs/
+
+2. import database อยู่ในโฟลเดอร์ helpdesk/db/localhost.sql จะได้ฐานข้อมูลชื่อ project_helpdesk
+
+3. config base_url สำหรับกำหนด url เริ่มต้นของระบบ อยู่ในโฟลเดอร์ helpdesk/application/config/config.php บรรทัดที่ 26  ถ้าไม่เปลี่ยนชื่อโฟลเดอร์ก็กำหนดตามนี้เลยจ้าไม่ต้องเปลี่ยนอะไร
+ $config['base_url'] = 'http://127.0.0.1/helpdeskv1.2/';
+***หรือถ้ามีการเปลี่ยนชืิ่อโฟลเดอร์ก็เปลี่ยนตรง helpdeskv1.2 เป็นชื่อโฟลเดอร์ใหม่ด้วย
+
+4. ตั้งค่าการเชื่อมต่อฐานข้อมูล อยู่ในโฟลเดอร์ helpdesk/application/config/database.php บรรทัด 78 - 81 แก้่ให้ถูกต้อง
+
+5. การเข้าใช้งานระบบ เปิด google chrome พิมพ์ http://127.0.0.1/helpdeskv1.2/ จากก็เอนเตอร์แรงๆทีนึง ก็เข้าใช้งานได้ละครับ สำหรับเครื่องปกติไม่ใส่ไข่นะ
+
+6.username & password ของแอดมินใส่ username =  a@a.com , password = a@a.com
+
+คลิปสอนทั้งระบบ https://www.youtube.com/playlist?list=PLEA4F1w-xYVarivBHQzqEymGfyAMWY1uj
+
+กรณีต้องการปรึกษาเพิ่มเติม คุณต้องสามารถทำ CRUD CodeIgniter แบบธรรมดาและส่งงานให้ผมดูก่อนถึงจะกล้าให้คำปรึกษาครับ 
+คลิปสอนครับ https://www.youtube.com/playlist?list=PLEA4F1w-xYVaY4qvlDOhiJAGE2QxdABK6
+
+ขอบคุณที่สนับสนุนครับ
+แฟจเพจ https://www.facebook.com/sornwebsites
+
+ปรึกษาได้ตั้งแต่เวลา 10.00 - 20.00 น.
