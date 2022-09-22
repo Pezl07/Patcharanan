@@ -32,7 +32,10 @@
     .fr{color: red;}
     </style>
 
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
@@ -108,7 +111,9 @@
         <li class="header">MAIN NAVIGATION</li>
            <li><a href="<?= site_url('jobs');?>"><i class="fa fa-home"></i> <span>HOME</span></a></li>
            <li><a href="<?= site_url('jobs');?>"><i class="fa fa-home"></i> <span>Jobs</span></a></li>
-           <li><a href="<?= site_url('report');?>"><i class="fa fa-home"></i> <span>Report</span></a></li>
+           <?php if($_SESSION['isAdmin'] == 1){ ?> 
+              <li><a href="<?= site_url('report');?>"><i class="fa fa-home"></i> <span>Report</span></a></li>
+           <?php } ?>
            <li><a href="<?= site_url('admin');?>"><i class="fa fa-home"></i> <span>admin</span></a></li>
           <li><a href="<?= site_url('login/logout');?>" onclick="return confirm('do you want to logout ?');"><i class="fa fa-edit"></i> <span>Logout</span></a></li>
       </ul>

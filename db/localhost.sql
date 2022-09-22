@@ -36,6 +36,7 @@ CREATE TABLE `tbl_admin` (
   `admin_pwd` varchar(50) NOT NULL,
   `admin_name` varchar(50) NOT NULL,
   `admin_status` int(1) NOT NULL DEFAULT 1 COMMENT '0=BAN, 1=Online'
+  `admin_position` int(1) NOT NULL DEFAULT 0 COMMENT '0=person, 1=admin'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

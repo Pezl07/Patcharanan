@@ -13,16 +13,22 @@ class Report extends CI_Controller {
 		$this->load->model('data_model');
 	}
 
-	public function index()
+	public function index($year = 0, $month = 0)
 	{
-		$data['queryreport']=$this->data_model->countbycasetype();
-		$data['querystatus']=$this->data_model->countbycasestatus();
+		if($month == 0)
+			$month = date("m");
+		
+		if($year == 0)
+			$year = date("Y");
+
+		$data['queryreport']=$this->data_model->countbycasetype($month, $year);
+		$data['querystatus']=$this->data_model->countbycasestatus($month, $year);
+		$data['month'] = $month;
+		$data['year'] = $year;
+
 		$this->load->view('template/header');
 		$this->load->view('backend/report_view',$data);
 		$this->load->view('template/footer');
 	}
-
-
-	
 
 }

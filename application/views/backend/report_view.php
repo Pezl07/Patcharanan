@@ -1,17 +1,23 @@
+<style>
+    .input-group-append{
+        position: absolute !important;
+    }
+
+</style>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
-        Report
-        </h1>
+        <h2>Report</h2>
     </section>
     <!-- Top menu -->
     <!-- Main content -->
     <section class="content">
         <!-- Your Page Content Here -->
-        <div class="box">
-            <div class="box-body">
+            <div class="box">
+                <div class="box-body">
+                    <input type="month" id="month" value="<?=$year.'-'.$month ?>" onchange="changeMonth()">
                 <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                     <div class="row">
                         <div class="col-sm-6">
@@ -159,3 +165,9 @@
             </div>
             </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
+            <script type="text/javascript">
+                function changeMonth(){
+                    var date = $('#month').val();
+                    window.location.href = "<?php echo base_url(); ?>/report/index/" + date.replace("-", "/");
+                }
+            </script>

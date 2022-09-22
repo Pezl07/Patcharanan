@@ -143,7 +143,6 @@ class Data_model extends CI_Model {
             return $query->result();
         }
 
-
 //query by case_type หรือตามชื่ออุปกรณ์
         public function by_case_type($case_type)
         {
@@ -152,28 +151,27 @@ class Data_model extends CI_Model {
             return $query->result();
         }
 
-
-
-        
-
-        
-
  //query count by case_type
-        public function countbycasetype()
+        public function countbycasetype($month, $year)
         {
             $this->db->select('case_type, COUNT(id) as casetotal');
             $this->db->group_by('case_type');
             $this->db->order_by('casetotal','desc');
+            $this->db->where('case_status',3);
+            $this->db->where('month(case_update)', $month);
+            $this->db->where('year(case_update)', $year);
             $query = $this->db->get('tbl_case');
             return $query->result();
         }     
 
 //query count by status
-        public function countbycasestatus()
+        public function countbycasestatus($month, $year)
         {
             $this->db->select('case_status, COUNT(id) as statustotal');
             $this->db->group_by('case_status');
             $this->db->order_by('statustotal','desc');
+            $this->db->where('month(case_update)', $month);
+            $this->db->where('year(case_update)', $year);
             $query = $this->db->get('tbl_case');
             return $query->result();
         }        

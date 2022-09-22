@@ -32,7 +32,8 @@ class Login extends CI_Controller {
 				$sess=array(
 					'id'    		=> $result->id,
 					'admin_status'    	=> $result->admin_status,
-					'admin_name'		=> $result->admin_name
+					'admin_name'		=> $result->admin_name,
+					'isAdmin'		=> $result->isAdmin
 				);
 
 				$this->session->set_userdata($sess);
@@ -44,13 +45,13 @@ class Login extends CI_Controller {
 				}else{
 					//u not admin
 					$this->session->set_flashdata('login_error', TRUE);
-					$this->session->unset_userdata(array('id','admin_status','admin_name'));
+					$this->session->unset_userdata(array('id','admin_status','admin_name','isAdmin'));
 					redirect('login', 'refresh');
 				}
 				
 			}else{
 				$this->session->set_flashdata('login_error', TRUE);
-				$this->session->unset_userdata(array('id','admin_status','admin_name'));
+				$this->session->unset_userdata(array('id','admin_status','admin_name', 'isAdmin'));
 				redirect('login', 'refresh');
 			}
 		}
@@ -62,7 +63,7 @@ class Login extends CI_Controller {
 public function logout()
 {
 	$this->session->set_flashdata('logout_success', TRUE);
-	$this->session->unset_userdata(array('id','admin_status','admin_name'));
+	$this->session->unset_userdata(array('id','admin_status','admin_name', 'isAdmin'));
 	redirect('', 'refresh');
 }
 
