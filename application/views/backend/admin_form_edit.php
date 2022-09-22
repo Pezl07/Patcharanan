@@ -37,6 +37,7 @@
                                             <span class="fr"><?= form_error('admin_name'); ?></span>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <div class="col-sm-2 control-label">
                                             status
@@ -53,6 +54,16 @@
                                         </div>
                                     </div>
                                     
+                                    <div class="form-group">
+                                        <div class="col-sm-2 control-label">
+                                            ผู้ดูแลระบบ
+                                        </div>
+                                        <div class="col-sm-4">
+                                        <input name="isAdmin" type="checkbox" value="1" 
+                                            <?= ($rsedit->isAdmin == 1) ? "checked='checked'" : ""; ?>>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="col-sm-2 control-label">
                                         </div>

@@ -46,6 +46,15 @@
                                             <span class="fr"><?= form_error('admin_name'); ?></span>
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-2 control-label">
+                                            ผู้ดูแลระบบ
+                                        </div>
+                                        <div class="col-sm-4 mt-2">
+                                            <input type="checkbox" name="isAdmin">
+                                        </div>
+                                    </div>
                                     
                                     <div class="form-group">
                                         <div class="col-sm-2 control-label">

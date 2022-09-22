@@ -111,6 +111,11 @@ class Admin extends CI_Controller {
                 }else{
                 	//exit;
 					$this->admin_model->update_admin();
+
+					if($_SESSION["id"] == $this->input->post('id')){
+						$_SESSION["isAdmin"] = $this->input->post('isAdmin');
+					}
+
 					$this->session->set_flashdata('save_success', TRUE);
 					redirect('admin','refresh');
                 }
