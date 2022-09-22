@@ -157,7 +157,6 @@ class Data_model extends CI_Model {
             $this->db->select('case_type, COUNT(id) as casetotal');
             $this->db->group_by('case_type');
             $this->db->order_by('casetotal','desc');
-            $this->db->where('case_status',3);
             $this->db->where('month(case_update)', $month);
             $this->db->where('year(case_update)', $year);
             $query = $this->db->get('tbl_case');

@@ -2,7 +2,7 @@
 	<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img class="d-block w-100" src="Img/g.jpg" alt="First slide">
+				<img class="d-block w-100" src="<?php echo base_url(); ?>Img/g.jpg" alt="First slide">
 			</div>
 		</div>
 	</div>
@@ -13,7 +13,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d6d4d0;">
 				<!-- Brand/logo -->
 				<a class="navbar-brand" href="<?= site_url(''); ?>">
-					<img src="Img/LOGO.png" alt="logo" style="width:40px;">
+					<img src="<?php echo base_url(); ?>/Img/LOGO.png" alt="logo" style="width:40px;">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
