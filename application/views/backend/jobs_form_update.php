@@ -76,7 +76,9 @@
                                                 ภาพประกอบ
                                             </div>
                                             <div class="col-sm-5">
-                                                <img src="<?= base_url('./asset/uploads/'.$query->p_img); ?>" width="100%">
+                                            <?php foreach ($img_detail as $img) { ?>
+                                                <img style="border: 1px solid black; margin: 5px;" src="<?= base_url() . 'Img/' . $img->p_img ?>" width="100%">
+                                            <?php } ?>
                                                 <br>
                                                 ว/ด/ป : <?= $query->date_save;?>
                                             </div>

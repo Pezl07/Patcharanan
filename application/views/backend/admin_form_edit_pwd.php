@@ -63,7 +63,7 @@
                                             <span class="fr"><?= form_error('id'); ?></span>
                                             <button class="btn btn-primary" type="submit">
                                             <i class="fa fa-fw fa-save"></i> บันทึกข้อมูล</button>
-                                            <a class="btn btn-danger" href="<?=  site_url('admin'); ?>" role="button"><i class="fa fa-fw fa-close"></i> ยกเลิก</a>
+                                            <a class="btn btn-danger" href="<?=  site_url($_SESSION["isAdmin"] == 1 ? 'admin' : 'admin/pwd/'. $_SESSION["id"]); ?>" role="button"><i class="fa fa-fw fa-close"></i> ยกเลิก</a>
                                             
                                             
                                         </div>

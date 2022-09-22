@@ -10,16 +10,23 @@ class Data_model extends CI_Model {
 
         public function insert_case()
         {
-                $filename = $this->upload->file_name;
                 $data = array(
                         'case_type' => $this->input->post('case_type'),
                         'case_detail' => $this->input->post('case_detail'),
                         'case_loc' => $this->input->post('case_loc'),
                         'p_name' => $this->input->post('p_name'),
                         'p_email' => $this->input->post('p_email'),
-                        'p_img' => $filename
                 );
                 $this->db->insert('tbl_case', $data);
+        }
+
+        public function insert_img_case($case_id, $case_img)
+        {
+                $data = array(
+                        'case_id' => $case_id,
+                        'p_img' => $case_img,
+                );
+                $this->db->insert('tbl_img', $data);
         }
 
         public function lastid($p_email)
@@ -45,6 +52,14 @@ class Data_model extends CI_Model {
                         return $data;
                 }
                 return FALSE;
+        }
+
+        public function get_detail_img($id){
+                $this->db->select('c.*');
+                $this->db->from('tbl_img c');
+                $this->db->where('c.case_id',$id);
+                $query = $this->db->get();
+                return $query->result();
         }
 
 

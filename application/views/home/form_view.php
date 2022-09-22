@@ -1,3 +1,10 @@
+<style>
+	.img_upload{
+		max-width: 350px;
+		border: 1px solid black;
+	}
+</style>
+
 <div class="container">
 	<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
@@ -80,7 +87,7 @@
 				</div>
 				<div class="form-group col  col-md-5">
 					<label>ภาพประกอบ (บังคับ)</label>
-					<input type="file" name="p_img" class="form-control" accept="image/*" required>
+					<input type="file" name="image" class="form-control" accept="image/*" multiple required>
 					<span class="fr"><?= $error; ?></span>
 				</div>
 				<div class="form-group col col-md-5">
@@ -90,3 +97,32 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$("[name=image]").change(function(event) 
+      {
+		$.each($(this)[0].files, function(i, file) {
+				var fd = new FormData();
+                var files = file;
+                fd.append('file', files);
+       
+                $.ajax({
+                    url: 'Form/testUpload',
+                    type: 'post',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        if(response != 0){
+                           var ele = '<img class="img_upload" src="Img/'+ response +'" alt="">';
+						   ele += '<input hidden name="img_upload_new[]" value="' + response + '">' 
+						   $( "[name=image]" ).after(ele);
+                        }
+                        else{
+                            alert('file not uploaded');
+                        }
+                    },
+                });
+		});
+      });
+</script>

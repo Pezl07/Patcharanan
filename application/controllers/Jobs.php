@@ -43,6 +43,7 @@ class Jobs extends CI_Controller {
 	public function getupdate($id)
 	{
 		$data['query']=$this->data_model->get_detail($id);
+		$data['img_detail']=$this->data_model->get_detail_img($id);
 
 		// echo '<pre>';
 		// print_r($data['rsedit']);

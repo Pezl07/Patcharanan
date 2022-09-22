@@ -151,7 +151,7 @@ class Admin extends CI_Controller {
                 {
                 	$this->admin_model->update_pwd_admin();
                 	$this->session->set_flashdata('save_success', TRUE);
-					redirect('admin','refresh');       
+					redirect($_SESSION["isAdmin"] == 1 ? 'admin' : 'admin/pwd/'. $_SESSION["id"],'refresh');       
                 }
 	}
 

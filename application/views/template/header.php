@@ -32,6 +32,8 @@
     .fr{color: red;}
     </style>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
@@ -46,9 +48,9 @@
     <!-- Logo -->
     <a href="<?php //echo $mylink;?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>My</b>Backend</span>
+      <span class="logo-mini"><img src="<?= base_url() ?>Img/LOGO.png" alt=""></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>My</b>Backend</span>
+      <span class="logo-lg"><img src="<?= base_url() ?>Img/LOGO.png" alt=""></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -68,24 +70,6 @@
               <span class="glyphicon glyphicon-user"></span>
               <span class="hidden-xs"><?php  echo $_SESSION['admin_name'];?></span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-              <span class="glyphicon glyphicon-user"></span>
-                <p>
-                  <?php echo $_SESSION['admin_name'];?>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="<?php // echo site_url('');?>" class="btn btn-primary btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="<?php echo site_url('login/logout');?>" onclick="return confirm('คุณต้องการออกจากระบบหรือไม่??');" class="btn btn-danger btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
           </li>
         </ul>
       </div>
@@ -110,12 +94,12 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-           <li><a href="<?= site_url('jobs');?>"><i class="fa fa-home"></i> <span>HOME</span></a></li>
-           <li><a href="<?= site_url('jobs');?>"><i class="fa fa-home"></i> <span>Jobs</span></a></li>
+           <li><a href="<?= site_url('jobs');?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
+           <li><a href="<?= site_url('jobs');?>"><i class="fa fa-list-alt"></i> <span>Jobs</span></a></li>
            <?php if($_SESSION['isAdmin'] == 1){ ?> 
-              <li><a href="<?= site_url('report');?>"><i class="fa fa-home"></i> <span>Report</span></a></li>
+              <li><a href="<?= site_url('report');?>"><i class="fa fa-folder-o"></i> <span>Report</span></a></li>
            <?php } ?>
-           <li><a href="<?= site_url('admin');?>"><i class="fa fa-home"></i> <span>admin</span></a></li>
+           <li><a href="<?= site_url( $_SESSION["isAdmin"] == 1 ? 'admin' : 'admin/pwd/'. $_SESSION["id"]);?>"><i class="fa fa-cog"></i> <span>Manage</span></a></li>
           <li><a href="<?= site_url('login/logout');?>" onclick="return confirm('do you want to logout ?');"><i class="fa fa-edit"></i> <span>Logout</span></a></li>
       </ul>
     </section>

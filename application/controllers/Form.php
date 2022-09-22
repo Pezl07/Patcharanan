@@ -22,9 +22,9 @@ class Form extends CI_Controller {
 	public function adding()
 	{
 
-		// echo '<pre>';
-		// print_r($_POST);
-		// echo '</pre>';
+		echo '<pre>';
+		print_r($_POST);
+		echo '</pre>';
 
 		$this->form_validation->set_rules('case_type', 'ประเภทปัญหา', 'trim|required|min_length[1]',
                 array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 1 ตัว'));
@@ -45,14 +45,14 @@ class Form extends CI_Controller {
 								$this->load->view('home/footer');
 		                }else{
 		                		//img
-							 		$config['upload_path']= 'asset/uploads/';
-					                $config['allowed_types']= 'gif|jpg|png';
-					                $config['encrypt_name']= TRUE;
-
-					                $this->load->library('upload', $config);
-					                if ( ! $this->upload->do_upload('p_img'))
+							 		// $config['upload_path']= 'asset/uploads/';
+					                // $config['allowed_types']= 'gif|jpg|png';
+					                // $config['encrypt_name']= TRUE;
+									$img = $this->input->post('img_upload_new');
+					                //  $this->load->library('upload', $config);
+					                if (!isset($img))
 					                {
-					                        $error = array('error' => $this->upload->display_errors());
+					                        $error = array('error' => "You did not select a file to upload.");
 					                        $this->load->view('home/header');
 											$this->load->view('home/form_view' , $error);
 											$this->load->view('home/footer');
@@ -64,6 +64,10 @@ class Form extends CI_Controller {
 					                	//print_r($data);
 					                	//echo $data['qlastid']->id;
 					                	
+										foreach ($img as $value) {
+											$this->data_model->insert_img_case($data['qlastid']->id, $value);
+										}
+
 					                	redirect('form/detail/'.$data['qlastid']->id,'refresh');
 					                }
 
@@ -72,9 +76,24 @@ class Form extends CI_Controller {
 		     	
 		}
 
+		public function testUpload(){
+			$config['upload_path']= 'img/';
+			$config['allowed_types']= 'gif|jpg|png';
+			$config['encrypt_name']= TRUE;
+
+			$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload('file')){
+				echo 0;
+			}else{
+				echo $this->upload->file_name;
+			}
+		}
+
 		public function detail($id)
 		{
 			$data['rs_detail']=$this->data_model->get_detail($id);
+			$data['img_detail']=$this->data_model->get_detail_img($id);
+
 			//print_r($data);
 			$this->load->view('home/header');
 			$this->load->view('home/form_detail' ,$data);

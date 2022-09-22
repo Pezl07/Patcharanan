@@ -101,7 +101,9 @@
 				</div>
 				<div class="form-group row col  col-sm-7">
 					<label>ภาพประกอบ</label>
-					<img src="<?= base_url('./asset/uploads/' . $rs_detail->p_img); ?>" width="100%">
+					<?php foreach ($img_detail as $img) { ?>
+						<img class="m-2 border border-dark" src="<?= base_url() . 'Img/' . $img->p_img ?>" width="100%">
+					<?php } ?>
 				</div>
 				<div class="form-group  col col-sm-5">
 					<br><br>
