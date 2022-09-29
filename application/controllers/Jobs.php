@@ -43,8 +43,8 @@ class Jobs extends CI_Controller {
 	public function getupdate($id)
 	{
 		$data['query']=$this->data_model->get_detail($id);
-		$data['img_detail']=$this->data_model->get_detail_img($id);
-
+		$data['img_detail']=$this->data_model->get_detail_img($id, 0);
+		$data['img_detail_emp']=$this->data_model->get_detail_img($id, 1);
 		// echo '<pre>';
 		// print_r($data['rsedit']);
 		// echo '</pre>';
@@ -79,7 +79,15 @@ class Jobs extends CI_Controller {
 					$this->load->view('backend/jobs_form_update',$data);
 					$this->load->view('template/footer');
                 }else{
+					$id = $this->input->post('id');
 					$this->data_model->update_job();
+					$img = $this->input->post('img_upload_new');
+					if (isset($img))
+					{
+						foreach ($img as $value) {
+							$this->data_model->insert_img_case($id, $value, 1);
+						}
+					}
 					$this->session->set_flashdata('save_success', TRUE);
 					redirect('jobs','refresh');
                 } //form vali

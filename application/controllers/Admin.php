@@ -45,6 +45,8 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('admin_email', 'อีเมล', 'trim|required|valid_email',
                 array('required' => 'กรุณากรอกข้อมูล %s.', 'valid_email' => 'รูปแบบอีเมลไม่ถูกต้อง'));
 
+		$this->form_validation->set_rules('admin_phone', 'เบอร์ติดต่อ', 'trim|required|max_length[12]',
+				array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลตามรูปแบบที่กำหนด'));
 
 		               if ($this->form_validation->run() == FALSE)
 		                {
@@ -87,7 +89,19 @@ class Admin extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function profile($id)
+	{
+		$data['rsedit']=$this->admin_model->read($id);
 
+		// echo '<pre>';
+		// print_r($data['rsedit']);
+		// echo '</pre>';
+		// exit();
+
+		$this->load->view('template/header');
+		$this->load->view('backend/admin_profile',$data);
+		$this->load->view('template/footer');
+	}
 
 	public function editdata()
 	{
@@ -100,6 +114,8 @@ class Admin extends CI_Controller {
                 array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 4 ตัว'));
 		$this->form_validation->set_rules('admin_status', 'สถานะช่าง', 'trim|required|min_length[1]',
                 array('required' => 'กรุณาเลือกสถานะ %s.', 'min_length' => 'กรุณาเลือกสถานะ'));
+		$this->form_validation->set_rules('admin_phone', 'เบอร์ติดต่อ', 'trim|required|max_length[12]',
+				array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลตามรูปแบบที่กำหนด'));
 
 		if ($this->form_validation->run() == FALSE)
                 {

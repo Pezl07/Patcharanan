@@ -84,8 +84,8 @@
 								<?=
 								'<b> แจ้งโดย ' . $rs->p_name
 									. '</b><br>'
-									. 'email : '
-									. $rs->p_email; ?></td>
+									. 'เบอร์ติดต่อ : '
+									. $rs->p_phone; ?></td>
 							<td>
 								<?php
 								if ($rs->case_status == 1) {

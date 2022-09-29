@@ -15,25 +15,26 @@ class Data_model extends CI_Model {
                         'case_detail' => $this->input->post('case_detail'),
                         'case_loc' => $this->input->post('case_loc'),
                         'p_name' => $this->input->post('p_name'),
-                        'p_email' => $this->input->post('p_email'),
+                        'p_phone' => $this->input->post('p_phone'),
                 );
                 $this->db->insert('tbl_case', $data);
         }
 
-        public function insert_img_case($case_id, $case_img)
+        public function insert_img_case($case_id, $case_img, $is_emp)
         {
                 $data = array(
                         'case_id' => $case_id,
                         'p_img' => $case_img,
+                        'is_emp' => $is_emp,
                 );
                 $this->db->insert('tbl_img', $data);
         }
 
-        public function lastid($p_email)
+        public function lastid($p_phone)
         {
                 $this->db->select_max('id');
                 $this->db->from('tbl_case c');
-                $this->db->where('c.p_email',$p_email);
+                $this->db->where('c.p_phone',$p_phone);
                 $query = $this->db->get();
                 if($query->num_rows() > 0){
                         $data = $query->row();
@@ -54,10 +55,11 @@ class Data_model extends CI_Model {
                 return FALSE;
         }
 
-        public function get_detail_img($id){
+        public function get_detail_img($id, $is_emp){
                 $this->db->select('c.*');
                 $this->db->from('tbl_img c');
                 $this->db->where('c.case_id',$id);
+                $this->db->where('c.is_emp', $is_emp);
                 $query = $this->db->get();
                 return $query->result();
         }

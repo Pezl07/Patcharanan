@@ -22,8 +22,9 @@ class Admin_model extends CI_Model {
 		$data = array(
                 'admin_name' => $this->input->post('admin_name'),
                 'admin_email' => $this->input->post('admin_email'),
+                'admin_phone' => $this->input->post('admin_phone'),
                 'admin_pwd' => sha1($this->input->post('admin_pwd')),
-                'isAdmin' => $this->input->post('isAdmin')
+                'isAdmin' => (isset($_POST['isAdmin']) ? $this->input->post('isAdmin') : 0)
                 );
                 $query=$this->db->insert('tbl_admin',$data);
 	}
@@ -44,8 +45,9 @@ class Admin_model extends CI_Model {
         {
                 $data = array(
                     'admin_name' => $this->input->post('admin_name'),
+                    'admin_phone' => $this->input->post('admin_phone'),
                     'admin_status' => $this->input->post('admin_status'),
-                    'isAdmin' => $this->input->post('isAdmin')
+                    'isAdmin' => (isset($_POST['isAdmin']) ? $this->input->post('isAdmin') : 0)
                 );
                 $this->db->where('id', $this->input->post('id'));
                 $query=$this->db->update('tbl_admin',$data);

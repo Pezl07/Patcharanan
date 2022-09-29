@@ -36,8 +36,9 @@
                                             <th  tabindex="0" rowspan="1" colspan="1" style="width: 25%;">Email</th>
                                             <th  tabindex="0" rowspan="1" colspan="1" style="width: 15%;">stauts</th>
                                             <th  tabindex="0" rowspan="1" colspan="1" style="width: 5%;">pwd</th>
+                                            <th  tabindex="0" rowspan="1" colspan="1" style="width: 5%;">ประวัติ</th> 
                                             <th  tabindex="0" rowspan="1" colspan="1" style="width: 5%;">แก้ไข</th>
-                                            <th  tabindex="0" rowspan="1" colspan="1" style="width: 5%;">ลบ</th>
+                                            <!-- <th  tabindex="0" rowspan="1" colspan="1" style="width: 5%;">ลบ</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -51,7 +52,7 @@
                                             if($rs->admin_status==1){
                                                 echo 'Online';
                                             }else{
-                                                echo 'Ban';
+                                                echo 'ยกเลิกการรับงาน';
                                             }
                                                 ?>  
                                                 </td>
@@ -61,13 +62,18 @@
                                                 </a>
                                             </td>
                                             <td>
+                                                <a href="<?php   echo site_url('admin/profile/'.$rs->id); ?>" class="btn btn-primary btn-xs">
+                                                    ประวัติ
+                                                </a>
+                                            </td>
+                                            <td>
                                                 <a href="<?php   echo site_url('admin/edit/'.$rs->id); ?>" class="btn btn-warning btn-xs">
                                                     แก้ไข
                                                 </a>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <a class="btn btn-danger btn-xs" href="<?= site_url('admin/del/'.$rs->id); ?>" role="button" onclick="return confirm('ยืนยันการลบข้อมูล??');"><i class="fa fa-fw fa-trash" ></i> ลบ</a>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         <?php  } ?>
                                     </tbody>

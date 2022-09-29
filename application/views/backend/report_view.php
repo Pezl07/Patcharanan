@@ -17,7 +17,7 @@
         <!-- Your Page Content Here -->
             <div class="box">
                 <div class="box-body">
-                    <input type="month" id="month" value="<?=$year.'-'.$month ?>" onchange="changeMonth()">
+                    <input type="month" id="month" value="<?=$year.'-'.$month ?>" onchange="changeMonth()" style="float:right;">
                 <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                     <div class="row">
                         <div class="col-sm-6">

@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
      <?php echo link_tag('asset/bt4/css/bootstrap.min.css'); ?>
      <?php echo link_tag('asset/bt4/css/mystyle.css'); ?>
+     <?php echo link_tag('asset/bower_components/font-awesome/css/font-awesome.min.css'); ?>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <!-- jquery for datatable & bootstrap navbar mobile -->
       <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>

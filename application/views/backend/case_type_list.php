@@ -47,8 +47,8 @@
                                                 <?=
                                                 $rs->p_name
                                                 .'<br>'
-                                                .'email : '
-                                                .$rs->p_email
+                                                .'เบอร์ติดต่อ : '
+                                                .$rs->p_phone
                                             ;?></td>
                                             <td>
                                                 <?php

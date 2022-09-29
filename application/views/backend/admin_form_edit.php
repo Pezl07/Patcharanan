@@ -40,16 +40,28 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-2 control-label">
+                                            เบอร์ติดต่อ
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="tel" name="admin_phone" class="form-control" placeholder="012-345-6789"
+                                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?= $rsedit->admin_phone; ?>"
+                                            required>
+                                        <span class="fr"><?= form_error('admin_phone'); ?></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-2 control-label">
                                             status
                                         </div>
                                         <div class="col-sm-3">
                                             <select name="admin_status" required class="form-control">
                                                 <span class="fr"><?= form_error('admin_status'); ?></span>
                                                 <option value="<?= $rsedit->admin_status;?>">
-                                                    <?php if($rsedit->admin_status==1){echo 'Online';}else{echo 'Ban';}?>  </option>
+                                                    <?php if($rsedit->admin_status==1){echo 'Online';}else{echo 'ยกเลิกการรับงาน';}?>  </option>
                                                     <option value="">--เปลี่ยน---</option>
                                                     <option value="1">-Online</option>
-                                                    <option value="0">-Ban</option>
+                                                    <option value="0">-ยกเลิกการรับงาน</option>
                                             </select>
                                         </div>
                                     </div>

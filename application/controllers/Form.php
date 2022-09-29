@@ -9,8 +9,6 @@ class Form extends CI_Controller {
 		$this->load->model('data_model');
 	}
 
-
-
 	public function index()
 	{
 		$this->load->view('home/header');
@@ -18,13 +16,8 @@ class Form extends CI_Controller {
 		$this->load->view('home/footer');
 	}
 
-
 	public function adding()
 	{
-
-		echo '<pre>';
-		print_r($_POST);
-		echo '</pre>';
 
 		$this->form_validation->set_rules('case_type', 'ประเภทปัญหา', 'trim|required|min_length[1]',
                 array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 1 ตัว'));
@@ -34,8 +27,11 @@ class Form extends CI_Controller {
                 array('required' => 'กรุณากรอกข้อมูล %s.','min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 5 ตัว'));
 		$this->form_validation->set_rules('p_name', 'ชื่อผู้แจ้ง', 'trim|required|min_length[3]',
 				array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 3 ตัว'));
-		$this->form_validation->set_rules('p_email', 'อีเมล', 'trim|required|valid_email',
-                array('required' => 'กรุณากรอกข้อมูล %s.', 'valid_email' => 'รูปแบบอีเมลไม่ถูกต้อง'));
+		$this->form_validation->set_rules('p_phone', 'เบอร์โทร', 'trim|required|max_length[12]',
+				array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลตามรูปแบบที่กำหนด'));
+
+		// $this->form_validation->set_rules('p_phone', 'อีเมล', 'trim|required|valid_email',
+        //         array('required' => 'กรุณากรอกข้อมูล %s.', 'valid_email' => 'รูปแบบอีเมลไม่ถูกต้อง'));
 
 
 		               if ($this->form_validation->run() == FALSE)
@@ -59,14 +55,16 @@ class Form extends CI_Controller {
 					                }else{
 					                	$this->data_model->insert_case();
 					                	//last id by user case
-					                	$data['qlastid']=$this->data_model->lastid($_POST['p_email']);
-					                	//echo $_POST['p_email'];
+					                	$data['qlastid']=$this->data_model->lastid($_POST['p_phone']);
+					                	//echo $_POST['p_phone'];
 					                	//print_r($data);
 					                	//echo $data['qlastid']->id;
 					                	
 										foreach ($img as $value) {
-											$this->data_model->insert_img_case($data['qlastid']->id, $value);
+											$this->data_model->insert_img_case($data['qlastid']->id, $value, 0);
 										}
+
+										$this->notifyLine($data['qlastid']->id);
 
 					                	redirect('form/detail/'.$data['qlastid']->id,'refresh');
 					                }
@@ -92,8 +90,8 @@ class Form extends CI_Controller {
 		public function detail($id)
 		{
 			$data['rs_detail']=$this->data_model->get_detail($id);
-			$data['img_detail']=$this->data_model->get_detail_img($id);
-
+			$data['img_detail']=$this->data_model->get_detail_img($id, 0);
+			$data['img_detail_emp']=$this->data_model->get_detail_img($id, 1);
 			//print_r($data);
 			$this->load->view('home/header');
 			$this->load->view('home/form_detail' ,$data);
@@ -106,6 +104,39 @@ class Form extends CI_Controller {
 		$this->load->view('home/header');
 		$this->load->view('home/list_case_view' ,$data);
 		$this->load->view('home/footer');
+	}
+
+	public function notifyLine($id){
+
+		$data['rs_detail']=$this->data_model->get_detail($id);
+
+		$sToken = "zlFRuNAm4sz7Kum7bdmnTN1YL5AhiOuKsHrunTPgZyv";
+		$sMessage = "\nประเภทปัญหา : ". $data['rs_detail']->case_type ."\n";
+		$sMessage .= "ชื่อผู้แจ้ง : ". $data['rs_detail']->p_name ."\n";
+		$sMessage .= "เบอร์ติดต่อ : ". $data['rs_detail']->p_phone ."\n";
+		$sMessage .= "link : ". base_url() . "form/detail/". $id;
+		
+		$chOne = curl_init(); 
+		curl_setopt( $chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify"); 
+		curl_setopt( $chOne, CURLOPT_SSL_VERIFYHOST, 0); 
+		curl_setopt( $chOne, CURLOPT_SSL_VERIFYPEER, 0); 
+		curl_setopt( $chOne, CURLOPT_POST, 1); 
+		curl_setopt( $chOne, CURLOPT_POSTFIELDS, "message=".$sMessage); 
+		$headers = array( 'Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer '.$sToken.'', );
+		curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers); 
+		curl_setopt( $chOne, CURLOPT_RETURNTRANSFER, 1); 
+		$result = curl_exec( $chOne ); 
+
+		//Result error 
+		if(curl_error($chOne)) 
+		{ 
+			echo 'error:' . curl_error($chOne); 
+		} 
+		else { 
+			$result_ = json_decode($result, true); 
+			echo "status : ".$result_['status']; echo "message : ". $result_['message'];
+		} 
+		curl_close( $chOne );   
 	}
 
 	/*log  0.7
