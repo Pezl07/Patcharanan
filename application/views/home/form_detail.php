@@ -99,12 +99,23 @@
 
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label>รายละเอียดปัญหา</label>
-                <textarea name="case_detail" class="form-control" disabled><?= $rs_detail->case_detail; ?></textarea>
+                <label>ถนน</label>
+                <input type="text" name="road_name" class="form-control" disabled value="<?= $rs_detail->road_name; ?>">
             </div>
             <div class="col-md-6 mb-3">
-                <label>สถานที่</label>
+                <label>ชุมชน</label>
+                <input type="text" name="cmu_name" class="form-control" disabled value="<?= $rs_detail->cmu_name; ?>">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label>รายละเอียดสถานที่</label>
                 <textarea name="case_loc" class="form-control" disabled><?= $rs_detail->case_loc; ?></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>รายละเอียดปัญหา</label>
+                <textarea name="case_detail" class="form-control" disabled><?= $rs_detail->case_detail; ?></textarea>
             </div>
             <div class="col-md-12 mb-3">
                 <label>หมายเหตุ</label>

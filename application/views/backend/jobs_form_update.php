@@ -60,14 +60,26 @@
                                         <input type="text" class="form-control" disabled value="<?= $query->p_phone;?>">
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
+                                    <div class="col-sm-6">
+                                        <label>ถนน</label>
+                                        <input type="text" class="form-control" disabled value="<?= $query->road_name;?>">
+                                    </div> 
+                                    <div class="col-sm-6">
+                                        <label>ชุมชน</label>
+                                        <input type="text" class="form-control" disabled value="<?= $query->cmu_name;?>">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="col-sm-6">
+                                        <label>รายละเอียดสถานที่</label>
+                                        <textarea class="form-control" disabled><?= $query->case_loc;?></textarea>
+                                    </div>
                                     <div class="col-sm-6">
                                         <label>รายละเอียด</label>
                                         <textarea class="form-control" disabled><?= $query->case_detail;?></textarea>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label>สถานที่</label>
-                                        <textarea class="form-control" disabled><?= $query->case_loc;?></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

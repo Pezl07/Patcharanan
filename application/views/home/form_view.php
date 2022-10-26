@@ -36,7 +36,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="<?= site_url(''); ?>">Home <span
+                            <a class="nav-link text-success" href="<?= site_url(''); ?>">Home <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
@@ -55,21 +55,27 @@
 <div class="container" style="margin-top: 50px">
     <form action="<?= site_url('form/adding'); ?>" method="post" class="form-horizontal" enctype="multipart/form-data">
         <div class="form-row">
-            <div class="form-group col-md-4">
-                <label>ชื่อผู้แจ้ง</label>
+            <div class="form-group col-md-3">
+                <label>ชื่อผู้แจ้ง <span class="text-danger">*</span></label>
                 <input type="text" name="p_name" class="form-control" required minlength="3"
                     placeholder="*ต้องการข้อมูล" value="<?= set_value('p_name'); ?>">
                 <span class="fr"><?= form_error('p_name'); ?></span>
             </div>
-            <div class="form-group col-md-4">
-                <label>เบอร์ผู้แจ้ง</label>
+            <div class="form-group col-md-3">
+                <label>นามสกุลผู้แจ้ง <span class="text-danger">*</span></label>
+                <input type="text" name="p_lastname" class="form-control" required minlength="3"
+                    placeholder="*ต้องการข้อมูล" value="<?= set_value('p_lastname'); ?>">
+                <span class="fr"><?= form_error('p_lastname'); ?></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label>เบอร์ผู้แจ้ง <span class="text-danger">*</span></label>
                 <!-- <input type="email" name="p_phone" class="form-control" required placeholder="*ต้องการข้อมูล"value="<?= set_value('p_phone'); ?>"> -->
                 <input type="tel" name="p_phone" class="form-control" placeholder="012-345-6789"
                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<?= set_value('p_phone'); ?>" required>
                 <span class="fr"><?= form_error('p_phone'); ?></span>
             </div>
-            <div class="form-group col-md-4">
-                <label>ประเภทปัญหา</label>
+            <div class="form-group col-md-3">
+                <label>ประเภทปัญหา <span class="text-danger">*</span></label>
                 <select name="case_type" class="form-control" required>
                     <?php if (set_value('case_type') != '') { ?>
                     <option value="<?= set_value('case_type'); ?>"><?= set_value('case_type'); ?></option>
@@ -86,23 +92,45 @@
                 </select>
             </div>
         </div>
+
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label>รายละเอียดปัญหา</label>
-                <textarea name="case_detail" class="form-control" required minlength="5"
-                    placeholder="*ต้องการข้อมูล"><?= set_value('case_detail'); ?></textarea>
-                <span class="fr"><?= form_error('case_detail'); ?></span>
+                <label>ถนน <span class="text-danger">*</span></label>
+                <select name="road_name" class="form-control" required>
+                    <option value="">Choose...</option>
+                    <?php foreach ($road as $r) { ?>
+                        <option value="<?=$r->road_name ?>" <?= set_value('case_type') == $r->road_name ? "selected" : "" ?>>-<?=$r->road_name ?>-</option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="form-group col-md-6">
-                <label>สถานที่</label>
+                <label>ชุมชน <span class="text-danger">*</span></label>
+                <select name="cmu_name" class="form-control" required>
+                    <option value="">Choose...</option>
+                    <?php foreach ($cmu as $c) { ?>
+                        <option value="<?=$c->cmu_name ?>" <?= set_value('case_type') == $c->cmu_name ? "selected" : "" ?>>-<?=$c->cmu_name ?>-</option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>รายละเอียดสถานที่ <span class="text-danger">*</span></label>
                 <textarea name="case_loc" class="form-control" required minlength="5"
                     placeholder="*ระบุตึก ชั้น ห้อง สถานที่ให้ครบถ้วน"><?= set_value('case_loc'); ?></textarea>
                 <span class="fr"><?= form_error('case_loc'); ?></span>
             </div>
+            <div class="form-group col-md-6">
+                <label>รายละเอียดปัญหา <span class="text-danger">*</span></label>
+                <textarea name="case_detail" class="form-control" required minlength="5"
+                    placeholder="*ต้องการข้อมูล"><?= set_value('case_detail'); ?></textarea>
+                <span class="fr"><?= form_error('case_detail'); ?></span>
+            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label id="n_img_case">ภาพประกอบ (บังคับ)</label>
+                <label id="n_img_case">ภาพประกอบ <span class="text-danger">*</span></label>
                 <div>
                     <button type="button" id="up_img" class="btn btn-info form-control col-md-1"><i class="fa fa-plus"
                             aria-hidden="true"></i></button>

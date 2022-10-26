@@ -2,9 +2,27 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Data_model extends CI_Model {
 
-        public function all()
+        public function all($status = 0)
         {
-                $query = $this->db->get('tbl_case');
+                $this->db->from('tbl_case c');
+                if($status != 0){
+                        $this->db->where('c.case_status',$status);
+                }
+
+                $query = $this->db->get();
+
+                return $query->result();
+        }
+
+        public function get_road()
+        {
+                $query = $this->db->get('tbl_road');
+                return $query->result();
+        }
+
+        public function get_cmu()
+        {
+                $query = $this->db->get('tbl_community');
                 return $query->result();
         }
 
@@ -12,9 +30,11 @@ class Data_model extends CI_Model {
         {
                 $data = array(
                         'case_type' => $this->input->post('case_type'),
+                        'road_name' => $this->input->post('road_name'),
+                        'cmu_name' => $this->input->post('cmu_name'),
                         'case_detail' => $this->input->post('case_detail'),
                         'case_loc' => $this->input->post('case_loc'),
-                        'p_name' => $this->input->post('p_name'),
+                        'p_name' => trim($this->input->post('p_name')) . " " . trim($this->input->post('p_lastname')),
                         'p_phone' => $this->input->post('p_phone'),
                 );
                 $this->db->insert('tbl_case', $data);

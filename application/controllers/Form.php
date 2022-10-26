@@ -11,8 +11,11 @@ class Form extends CI_Controller {
 
 	public function index()
 	{
+		$data['road'] = $this->data_model->get_road();
+		$data['cmu'] = $this->data_model->get_cmu();
+		$data["error"] = "";
 		$this->load->view('home/header');
-		$this->load->view('home/form_view' , array('error' => ' ' ));
+		$this->load->view('home/form_view' , $data);
 		$this->load->view('home/footer');
 	}
 
@@ -21,11 +24,17 @@ class Form extends CI_Controller {
 
 		$this->form_validation->set_rules('case_type', 'ประเภทปัญหา', 'trim|required|min_length[1]',
                 array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 1 ตัว'));
+		$this->form_validation->set_rules('road_name', 'ถนน', 'trim|required|min_length[1]',
+                array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 1 ตัว'));
+		$this->form_validation->set_rules('cmu_name', 'ชุมชน', 'trim|required|min_length[1]',
+                array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 1 ตัว'));
 		$this->form_validation->set_rules('case_detail', 'รายละเอียดปัญหา', 'trim|required|min_length[5]',
                 array('required' => 'กรุณากรอกข้อมูล %s.','min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 5 ตัว'));
 		$this->form_validation->set_rules('case_loc', 'สถานที่', 'trim|required|min_length[5]',
                 array('required' => 'กรุณากรอกข้อมูล %s.','min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 5 ตัว'));
 		$this->form_validation->set_rules('p_name', 'ชื่อผู้แจ้ง', 'trim|required|min_length[3]',
+				array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 3 ตัว'));
+		$this->form_validation->set_rules('p_lastname', 'นามสกุลผู้แจ้ง', 'trim|required|min_length[3]',
 				array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลขั้นต่ำ 3 ตัว'));
 		$this->form_validation->set_rules('p_phone', 'เบอร์โทร', 'trim|required|max_length[12]',
 				array('required' => 'กรุณากรอกข้อมูล %s.', 'min_length' => 'กรุณากรอกข้อมูลตามรูปแบบที่กำหนด'));
@@ -33,11 +42,13 @@ class Form extends CI_Controller {
 		// $this->form_validation->set_rules('p_phone', 'อีเมล', 'trim|required|valid_email',
         //         array('required' => 'กรุณากรอกข้อมูล %s.', 'valid_email' => 'รูปแบบอีเมลไม่ถูกต้อง'));
 
-
+		$data['road'] = $this->data_model->get_road();
+		$data['cmu'] = $this->data_model->get_cmu();
 		               if ($this->form_validation->run() == FALSE)
 		                {
+								$data["error"] = "";
 						      	$this->load->view('home/header');
-								$this->load->view('home/form_view' , array('error' => ' ' ));
+								$this->load->view('home/form_view' , $data);
 								$this->load->view('home/footer');
 		                }else{
 		                		//img
@@ -48,9 +59,9 @@ class Form extends CI_Controller {
 					                //  $this->load->library('upload', $config);
 					                if (!isset($img))
 					                {
-					                        $error = array('error' => "You did not select a file to upload.");
+											$data["error"] = "You did not select a file to upload.";
 					                        $this->load->view('home/header');
-											$this->load->view('home/form_view' , $error);
+											$this->load->view('home/form_view' , $data);
 											$this->load->view('home/footer');
 					                }else{
 					                	$this->data_model->insert_case();
@@ -98,9 +109,10 @@ class Form extends CI_Controller {
 			$this->load->view('home/footer');
 		}
 
-	public function allcase()
+	public function allcase($status = 0)
 	{
-		$data['query']=$this->data_model->all();
+		$data['query']=$this->data_model->all($status);
+		$data['case_status'] = $status;
 		$this->load->view('home/header');
 		$this->load->view('home/list_case_view' ,$data);
 		$this->load->view('home/footer');
@@ -142,11 +154,12 @@ class Form extends CI_Controller {
 	/*log  0.7
 			-เพิ่มเมนูลิงค์ไปติดตามในโฟลเดอร์ home
 			-ตัด <script src="<?php echo base_url(); ?>asset/bt4/js/jquery-3.3.1.slim.min.js"></script> ออกจาก home/footer
-			-เพิ่ม <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script> ใน home/header
-			-เพิ่ม home/list_case_view.php
-			- datatable sorting column 0
-			- list call link show detail
-		*/ 
+-เพิ่ม <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script> ใน
+home/header
+-เพิ่ม home/list_case_view.php
+- datatable sorting column 0
+- list call link show detail
+*/
 
 
 }
